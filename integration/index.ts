@@ -14,7 +14,7 @@ interface NetlifyCMSOptions {
    */
   adminPath?: string;
   config: Omit<CmsConfig, 'load_config_file' | 'local_backend'>;
-  disableIdentityWidgetInjection?: boolean;
+  disableIdentityWidgetInjection?: boolean | "adminPathOnly";
   previewStyles?: PreviewStyle[];
 }
 
@@ -66,9 +66,9 @@ export default function NetlifyCMS({
           pattern: adminPath,
           entryPoint: 'astro-netlify-cms/admin-dashboard.astro',
         });
-        if (!disableIdentityWidgetInjection) {
+        if (disableIdentityWidgetInjection === false) {
           injectScript(
-            'page',
+            'page', 
             `import { initIdentity } from '${widgetPath}'; initIdentity('${adminPath}')`
           );
         }

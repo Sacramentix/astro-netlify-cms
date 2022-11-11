@@ -9,9 +9,9 @@
     <script>
       import options from 'virtual:astro-netlify-cms/user-config';
       import initCMS from './dist/cms';
-      import { initIdentity } from './dist/identity-widget';
-      initIdentity(`/admin`);
+      if (options.disableIdentityWidgetInjection == "adminPathOnly") import('./dist/identity-widget').then(m=>m.initIdentity(options.adminPath));
       initCMS(options);
+      import('dns/promises')
     </script>
     <style is:global>
       /* Workaround for https://github.com/netlify/netlify-cms/issues/5092 */
