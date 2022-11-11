@@ -9,6 +9,8 @@
     <script>
       import options from 'virtual:astro-netlify-cms/user-config';
       import initCMS from './dist/cms';
+      import { initIdentity } from './dist/identity-widget';
+      initIdentity(`/admin`);
       initCMS(options);
     </script>
     <style is:global>
